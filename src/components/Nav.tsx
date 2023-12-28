@@ -5,6 +5,8 @@ import { Switch } from "./ui/switch";
 import { Label } from "./ui/label";
 import { useTheme } from "next-themes";
 
+import { cn } from "@/lib/utils";
+
 const Nav = () => {
   const { setTheme, resolvedTheme } = useTheme();
   const isDark = resolvedTheme === "dark";
@@ -25,10 +27,12 @@ const Nav = () => {
   }
 
   return (
-    <header>
-      <nav>
+    <header className={cn("grid place-items-center")}>
+      <nav className={cn("place-self-end space-x-2")}>
         <Switch id="dark-mode" checked={isDark} onCheckedChange={changeTheme} />
-        <Label htmlFor="dark-mode">Dark mode</Label>
+        <Label style={{ verticalAlign: "text-top" }} htmlFor="dark-mode">
+          Dark mode
+        </Label>
       </nav>
     </header>
   );
