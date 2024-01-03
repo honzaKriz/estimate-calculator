@@ -4,6 +4,7 @@ import { Card } from "../atoms/card";
 import { Input } from "@/app/atoms/input";
 import Nav from "../molecules/Nav";
 import { FormProvider, useForm } from "react-hook-form";
+import cardTexts from "./cardTexts";
 import AnimatedBackground from "./AnimatedBackground";
 import {
   Form,
@@ -22,7 +23,7 @@ const formSchema = z.object({
 });
 
 const CalcCard = () => {
-  const [cardState, setCardState] = useState("initial");
+  const [cardState, setCardState] = useState(1);
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
   });
@@ -30,7 +31,7 @@ const CalcCard = () => {
   const methods = useForm();
 
   const handleButtonClick = () => {
-    setCardState("clicked");
+    setCardState((prevState) => prevState + 1);
   };
 
   return (
@@ -42,10 +43,13 @@ const CalcCard = () => {
       >
         <Nav />
         <p className="text-white font-semibold opacity-100 mb-3">
-          Ujisti se, že sis přečetl zadání a akceptační kritéria tvého úkolu.
-          Pokud je ti vše jasné, představ si, kolik času ti zabere vývoj řešení
-          za ideálního stavu, kdy vše funguje, jak předpokládáš, na ničem se
-          nezasekneš, a řešení se ti nevrátí z code review ani testingu.
+          {cardState === 1
+            ? cardTexts.stepOne
+            : cardState === 2
+            ? cardTexts.stepTwo
+            : cardState === 3
+            ? cardTexts.stepThree
+            : cardTexts.success}
         </p>
         <FormProvider {...methods}>
           <Form {...form}>
@@ -60,7 +64,7 @@ const CalcCard = () => {
             ></FormField>
           </Form>
         </FormProvider>
-        <Button>Další</Button>
+        <Button onClick={handleButtonClick}>Další</Button>
       </Card>
     </>
   );

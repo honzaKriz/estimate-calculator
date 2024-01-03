@@ -1,8 +1,6 @@
 "use client";
 
 import React from "react";
-import { Switch } from "../atoms/switch";
-import { Label } from "../atoms/label";
 import { useTheme } from "next-themes";
 
 import { cn } from "@/app/utils/lib/utils";
