@@ -6,6 +6,9 @@ const cardTexts = {
   stepThree:
     "Teď budeme malovat čerta na zeď, ale má to svůj důvod. Pro co nejlepší odhad potřebujeme pracovat i se scénářem, kdy co může, to se pokazí, zasekneš se na opravdu zapeklitém problému, a po code review budeš muset celé řešení předělat.",
   success: "Tady je tvůj vážený odhad:",
+  buttonNext: "Další",
+  buttonFinished: "Spočítat odhad",
+  buttonNewCount: "Začít nový výpočet",
 };
 
 export default cardTexts;

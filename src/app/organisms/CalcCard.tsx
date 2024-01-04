@@ -30,8 +30,12 @@ const CalcCard = () => {
 
   const methods = useForm();
 
-  const handleButtonClick = () => {
+  const handleNextButtonClick = () => {
     setCardState((prevState) => prevState + 1);
+  };
+
+  const handleBackButtonClick = () => {
+    setCardState((prevState) => prevState - 1);
   };
 
   return (
@@ -41,7 +45,29 @@ const CalcCard = () => {
         className="bg-black mt-32 z-1000 absolute left-1/2 top-5 transform -translate-x-1/2 grid col-span-1 gap-4 px-32 pt-24"
         style={{ backgroundColor: "rgba(0, 0, 0, 0.6)" }}
       >
-        <Nav />
+        <Nav>
+          {cardState > 1 ? (
+            <Button
+              className="z-1000 absolute left-4 top-5"
+              onClick={handleBackButtonClick}
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <polyline points="9 14 4 9 9 4" />
+                <path d="M20 20v-7a4 4 0 0 0-4-4H4" />
+              </svg>
+            </Button>
+          ) : null}
+        </Nav>
         <p className="text-white font-semibold opacity-100 mb-3">
           {cardState === 1
             ? cardTexts.stepOne
@@ -53,18 +79,26 @@ const CalcCard = () => {
         </p>
         <FormProvider {...methods}>
           <Form {...form}>
-            <FormField
-              name=""
-              render={({ field }) => (
-                <FormItem>
-                  <Input></Input>
-                  <FormControl></FormControl>
-                </FormItem>
-              )}
-            ></FormField>
+            {cardState < 4 ? (
+              <FormField
+                name=""
+                render={({ field }) => (
+                  <FormItem>
+                    <Input></Input>
+                    <FormControl></FormControl>
+                  </FormItem>
+                )}
+              ></FormField>
+            ) : null}
           </Form>
         </FormProvider>
-        <Button onClick={handleButtonClick}>Další</Button>
+        <Button onClick={handleNextButtonClick}>
+          {cardState < 3
+            ? cardTexts.buttonNext
+            : cardState === 3
+            ? cardTexts.buttonFinished
+            : cardTexts.buttonNewCount}
+        </Button>
       </Card>
     </>
   );
