@@ -31,7 +31,11 @@ const CalcCard = () => {
   const methods = useForm();
 
   const handleNextButtonClick = () => {
-    setCardState((prevState) => prevState + 1);
+    if (cardState === 4) {
+      setCardState(1);
+    } else {
+      setCardState((prevState) => prevState + 1);
+    }
   };
 
   const handleBackButtonClick = () => {
@@ -45,7 +49,7 @@ const CalcCard = () => {
         className="bg-black mt-32 z-1000 absolute left-1/2 top-5 transform -translate-x-1/2 grid col-span-1 gap-4 px-32 pt-24"
         style={{ backgroundColor: "rgba(0, 0, 0, 0.6)" }}
       >
-        <Nav>
+        <Nav stepNumber={cardState}>
           {cardState > 1 ? (
             <Button
               className="z-1000 absolute left-4 top-5"
