@@ -30,7 +30,7 @@ const CalcCard = () => {
 
   const methods = useForm();
 
-  const handleNextButtonClick = () => {
+  const handleNextCard = () => {
     if (cardState === 4) {
       setCardState(1);
     } else {
@@ -41,6 +41,8 @@ const CalcCard = () => {
   const handleBackButtonClick = () => {
     setCardState((prevState) => prevState - 1);
   };
+
+  const handleSubmit = () => {};
 
   return (
     <>
@@ -84,19 +86,29 @@ const CalcCard = () => {
         <FormProvider {...methods}>
           <Form {...form}>
             {cardState < 4 ? (
-              <FormField
-                name=""
-                render={({ field }) => (
-                  <FormItem>
-                    <Input></Input>
-                    <FormControl></FormControl>
-                  </FormItem>
-                )}
-              ></FormField>
+              <form onSubmit={form.handleSubmit(handleSubmit)}>
+                <FormField
+                  control={form.control}
+                  name="estimate"
+                  render={({ field }) => {
+                    return (
+                      <FormItem>
+                        <FormControl>
+                          <Input
+                            placeholder="Odhad v hodinách"
+                            type="number"
+                            {...field}
+                          ></Input>
+                        </FormControl>
+                      </FormItem>
+                    );
+                  }}
+                />
+              </form>
             ) : null}
           </Form>
         </FormProvider>
-        <Button onClick={handleNextButtonClick}>
+        <Button type="submit" onClick={handleSubmit}>
           {cardState < 3
             ? cardTexts.buttonNext
             : cardState === 3
