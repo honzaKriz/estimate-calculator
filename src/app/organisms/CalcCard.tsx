@@ -3,38 +3,24 @@ import { Button } from "../atoms/button";
 import { Card } from "../atoms/card";
 import { Input } from "@/app/atoms/input";
 import Nav from "../molecules/Nav";
-import { FormProvider, useForm } from "react-hook-form";
 import cardTexts from "./cardTexts";
 import AnimatedBackground from "./AnimatedBackground";
-import {
-  Form,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormControl,
-  FormDescription,
-  FormMessage,
-} from "@/app/atoms/form";
-import * as z from "zod";
-import { zodResolver } from "@hookform/resolvers/zod";
-
-const formSchema = z.object({
-  estimate: z.number(),
-});
 
 const CalcCard = () => {
   const [cardState, setCardState] = useState(1);
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
-  });
+  const [estimate, setEstimate] = useState(0);
+  const [result, setResult] = useState(0);
 
-  const methods = useForm();
+  let estimatesArr: number[] = [];
 
   const handleNextCard = () => {
     if (cardState === 4) {
       setCardState(1);
+      setResult(0);
+      estimatesArr = [];
     } else {
       setCardState((prevState) => prevState + 1);
+      estimatesArr.push(estimate);
     }
   };
 
@@ -42,7 +28,20 @@ const CalcCard = () => {
     setCardState((prevState) => prevState - 1);
   };
 
-  const handleSubmit = () => {};
+  const handleSubmit = () => {
+    setResult(
+      estimatesArr.reduce((acc, num) => {
+        return acc + num;
+      })
+    );
+  };
+
+  const handleNextButtonClick = () => {
+    handleNextCard();
+    if (cardState === 3) {
+      handleSubmit();
+    }
+  };
 
   return (
     <>
@@ -83,32 +82,19 @@ const CalcCard = () => {
             ? cardTexts.stepThree
             : cardTexts.success}
         </p>
-        <FormProvider {...methods}>
-          <Form {...form}>
-            {cardState < 4 ? (
-              <form onSubmit={form.handleSubmit(handleSubmit)}>
-                <FormField
-                  control={form.control}
-                  name="estimate"
-                  render={({ field }) => {
-                    return (
-                      <FormItem>
-                        <FormControl>
-                          <Input
-                            placeholder="Odhad v hodinách"
-                            type="number"
-                            {...field}
-                          ></Input>
-                        </FormControl>
-                      </FormItem>
-                    );
-                  }}
-                />
-              </form>
-            ) : null}
-          </Form>
-        </FormProvider>
-        <Button type="submit" onClick={handleSubmit}>
+        <div>
+          {cardState < 4 ? (
+            <Input
+              placeholder="Odhad v hodinách"
+              type="number"
+              value={estimate}
+              onChange={(e) => setEstimate(parseInt(e.target.value))}
+            ></Input>
+          ) : (
+            <p>Výsledný odhad je {result}</p>
+          )}
+        </div>
+        <Button type="submit" onClick={handleNextButtonClick}>
           {cardState < 3
             ? cardTexts.buttonNext
             : cardState === 3
