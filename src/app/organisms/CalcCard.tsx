@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Button } from "../atoms/button";
 import { Card } from "../atoms/card";
 import { Input } from "@/app/atoms/input";
@@ -10,17 +10,17 @@ const CalcCard = () => {
   const [cardState, setCardState] = useState(1);
   const [estimate, setEstimate] = useState(0);
   const [result, setResult] = useState(0);
+  const [estimatesArr, setEstimatesArr] = useState<number[]>([]);
 
-  let estimatesArr: number[] = [];
-
-  const handleNextCard = () => {
+  const handleNextButtonClick = () => {
     if (cardState === 4) {
       setCardState(1);
       setResult(0);
-      estimatesArr = [];
+      setEstimatesArr([]);
     } else {
       setCardState((prevState) => prevState + 1);
-      estimatesArr.push(estimate);
+      setEstimatesArr((prevEstimates) => [...prevEstimates, estimate]);
+      setEstimate(0);
     }
   };
 
@@ -36,12 +36,11 @@ const CalcCard = () => {
     );
   };
 
-  const handleNextButtonClick = () => {
-    handleNextCard();
-    if (cardState === 3) {
+  useEffect(() => {
+    if (cardState === 4) {
       handleSubmit();
     }
-  };
+  }, [cardState, estimatesArr]);
 
   return (
     <>
