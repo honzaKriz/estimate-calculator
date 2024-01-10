@@ -29,11 +29,12 @@ const CalcCard = () => {
   };
 
   const handleSubmit = () => {
-    setResult(
-      estimatesArr.reduce((acc, num) => {
-        return acc + num;
-      })
-    );
+    setResult(Math.ceil(calculateEstimate(estimatesArr)));
+  };
+
+  const calculateEstimate = (arr: number[]) => {
+    const [o, r, p] = arr;
+    return (o + 4 * r + p) / 6;
   };
 
   useEffect(() => {
