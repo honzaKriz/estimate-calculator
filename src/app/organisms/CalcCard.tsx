@@ -34,11 +34,11 @@ const CalcCard = () => {
 
   const calculateEstimate = (arr: number[]) => {
     const [o, r, p] = arr;
-    let result = Math.ceil((o + 4 * r + p) / 6);
-    if (result > 8) {
-      return `${result / 8} MD (${result} hodin)`;
+    let res = Math.ceil((o + 4 * r + p) / 6);
+    if (res > 8) {
+      return `${res / 8} MD (${res} hodin)`;
     } else {
-      return `${result} hodin`;
+      return `${res} hodin`;
     }
   };
 
@@ -85,7 +85,7 @@ const CalcCard = () => {
             ? cardTexts.stepTwo
             : cardState === 3
             ? cardTexts.stepThree
-            : cardTexts.success}
+            : null}
         </p>
         <div>
           {cardState < 4 ? (
@@ -96,7 +96,9 @@ const CalcCard = () => {
               onChange={(e) => setEstimate(parseInt(e.target.value))}
             ></Input>
           ) : (
-            <p>Výsledný odhad je {result}</p>
+            <p className="font-bold text-3xl text-center text-lime-400 mb-12">
+              Výsledný odhad je {result}
+            </p>
           )}
         </div>
         <Button type="submit" onClick={handleNextButtonClick}>
