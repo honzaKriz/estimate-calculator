@@ -9,13 +9,13 @@ import AnimatedBackground from "./AnimatedBackground";
 const CalcCard = () => {
   const [cardState, setCardState] = useState(1);
   const [estimate, setEstimate] = useState(0);
-  const [result, setResult] = useState(0);
+  const [result, setResult] = useState("");
   const [estimatesArr, setEstimatesArr] = useState<number[]>([]);
 
   const handleNextButtonClick = () => {
     if (cardState === 4) {
       setCardState(1);
-      setResult(0);
+      setResult("");
       setEstimatesArr([]);
     } else {
       setCardState((prevState) => prevState + 1);
@@ -29,12 +29,17 @@ const CalcCard = () => {
   };
 
   const handleSubmit = () => {
-    setResult(Math.ceil(calculateEstimate(estimatesArr)));
+    setResult(calculateEstimate(estimatesArr));
   };
 
   const calculateEstimate = (arr: number[]) => {
     const [o, r, p] = arr;
-    return (o + 4 * r + p) / 6;
+    let result = Math.ceil((o + 4 * r + p) / 6);
+    if (result > 8) {
+      return `${result / 8} MD (${result} hodin)`;
+    } else {
+      return `${result} hodin`;
+    }
   };
 
   useEffect(() => {
