@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { Button } from "../atoms/button";
 import { Card } from "../atoms/card";
 import { Input } from "@/app/atoms/input";
@@ -27,7 +27,6 @@ const CalcCard = () => {
 
   return (
     <>
-      <AnimatedBackground className="relative max-h-screen blur bg-opacity-100 bg-black h-screen w-full overflow-hidden"></AnimatedBackground>
       <Card
         className="bg-black mt-32 z-1000 absolute left-1/2 top-5 transform -translate-x-1/2 grid col-span-1 gap-4 px-32 pt-24"
         style={{ backgroundColor: "rgba(0, 0, 0, 0.6)" }}
