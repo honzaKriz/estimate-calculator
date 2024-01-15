@@ -5,42 +5,19 @@ import { Input } from "@/app/atoms/input";
 import Nav from "../molecules/Nav";
 import cardTexts from "./cardTexts";
 import AnimatedBackground from "./AnimatedBackground";
+import useCalcCardLogic from "../hooks/useCalcCardLogic";
 
 const CalcCard = () => {
-  const [cardState, setCardState] = useState(1);
-  const [estimate, setEstimate] = useState(0);
-  const [result, setResult] = useState("");
-  const [estimatesArr, setEstimatesArr] = useState<number[]>([]);
-
-  const handleNextButtonClick = () => {
-    if (cardState === 4) {
-      setCardState(1);
-      setResult("");
-      setEstimatesArr([]);
-    } else {
-      setCardState((prevState) => prevState + 1);
-      setEstimatesArr((prevEstimates) => [...prevEstimates, estimate]);
-      setEstimate(0);
-    }
-  };
-
-  const handleBackButtonClick = () => {
-    setCardState((prevState) => prevState - 1);
-  };
-
-  const handleSubmit = () => {
-    setResult(calculateEstimate(estimatesArr));
-  };
-
-  const calculateEstimate = (arr: number[]) => {
-    const [o, r, p] = arr;
-    let res = Math.ceil((o + 4 * r + p) / 6);
-    if (res > 8) {
-      return `${res / 8} MD (${res} hodin)`;
-    } else {
-      return `${res} hodin`;
-    }
-  };
+  const {
+    cardState,
+    estimate,
+    setEstimate,
+    estimatesArr,
+    result,
+    handleNextButtonClick,
+    handleBackButtonClick,
+    handleSubmit,
+  } = useCalcCardLogic();
 
   useEffect(() => {
     if (cardState === 4) {
