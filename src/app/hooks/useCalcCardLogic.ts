@@ -1,15 +1,17 @@
-import { useState } from "react";
+import { useState } from 'react';
 
 const useCalcCardLogic = () => {
   const [cardState, setCardState] = useState(1);
   const [estimate, setEstimate] = useState(0);
-  const [result, setResult] = useState("");
+  const [result, setResult] = useState('');
   const [estimatesArr, setEstimatesArr] = useState<number[]>([]);
 
   const handleNextButtonClick = () => {
-    if (cardState === 4) {
+    if (estimate <= 0 && cardState !== 4) {
+      alert('Zadaná hodnota nemůže být nula');
+    } else if (cardState === 4) {
       setCardState(1);
-      setResult("");
+      setResult('');
       setEstimatesArr([]);
     } else {
       setCardState((prevState) => prevState + 1);
@@ -20,6 +22,7 @@ const useCalcCardLogic = () => {
 
   const handleBackButtonClick = () => {
     setCardState((prevState) => prevState - 1);
+    setEstimatesArr((prevEstimateArray) => prevEstimateArray.slice(0, -1));
   };
 
   const handleSubmit = () => {
