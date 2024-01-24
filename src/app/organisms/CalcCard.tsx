@@ -33,7 +33,7 @@ const CalcCard = () => {
         <Nav stepNumber={cardState}>
           {cardState > 1 ? (
             <Button
-              className='z-1000 absolute left-4 top-5'
+              className='z-1000 absolute left-4 top-5 bg-slate-700 hover:bg-slate-800'
               onClick={handleBackButtonClick}
             >
               <svg
@@ -69,28 +69,35 @@ const CalcCard = () => {
               type='number'
               value={estimate}
               onChange={(e) => setEstimate(parseInt(e.target.value))}
+              className='text-lime-400 font-bold'
             ></Input>
           ) : (
             <>
-              <div>
-                <div className='flex justify-between'>
-                  <p>O</p>
-                  <p>R</p>
-                  <p>P</p>
+              <div className='flex justify-between mb-8 text-white border-b pb-4'>
+                <div className='flex flex-col items-center'>
+                  <p>Optimistický</p>
+                  <p className='font-bold'>{estimatesArr[0]}h</p>
                 </div>
-                <div className='flex justify-between'>
-                  <p>{estimatesArr[0]}</p>
-                  <p>{estimatesArr[1]}</p>
-                  <p>{estimatesArr[2]}</p>
+                <div className='flex flex-col items-center'>
+                  <p>Realistický</p>
+                  <p className='font-bold'>{estimatesArr[1]}h</p>
+                </div>
+                <div className='flex flex-col items-center'>
+                  <p>Pesimistický</p>
+                  <p className='font-bold'>{estimatesArr[2]}h</p>
                 </div>
               </div>
-              <p className='font-bold text-3xl text-center text-lime-400 mb-12'>
-                Výsledný odhad je {result}
+              <p className='font-bold text-3xl text-center text-lime-500 mb-12'>
+                Výsledný odhad jsou {result}
               </p>
             </>
           )}
         </div>
-        <Button type='submit' onClick={handleNextButtonClick}>
+        <Button
+          type='submit'
+          onClick={handleNextButtonClick}
+          className='bg-green-600 h-12 hover:bg-green-700'
+        >
           {cardState < 3
             ? cardTexts.buttonNext
             : cardState === 3

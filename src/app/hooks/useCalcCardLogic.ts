@@ -34,8 +34,10 @@ const useCalcCardLogic = () => {
     let res = Math.ceil((o + 4 * r + p) / 6);
     if (res > 8) {
       return `${res / 8} MD (${res} hodin)`;
-    } else {
+    } else if (res > 4) {
       return `${res} hodin`;
+    } else {
+      return `${res} hodiny`;
     }
   };
 

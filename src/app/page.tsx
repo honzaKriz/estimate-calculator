@@ -10,7 +10,7 @@ import BackgroundIcon from '../images/backgroundIcon.png';
 import Image from 'next/image';
 
 export default function Home() {
-  const [background, setBackground] = useState('light');
+  const [background, setBackground] = useState('Light');
 
   useEffect(() => {
     if (background === 'Dark') {
@@ -45,19 +45,31 @@ export default function Home() {
         <PopoverContent className='w-30 bg-black flex flex-col gap-2'>
           <Button
             onClick={toggleBackground}
-            className='hover:bg-white hover:text-black'
+            className={
+              background === 'Light'
+                ? 'bg-white text-black hover:bg-white hover:text-black'
+                : 'hover:bg-white hover:text-black'
+            }
           >
             Light
           </Button>
           <Button
             onClick={toggleBackground}
-            className='hover:bg-white hover:text-black'
+            className={
+              background === 'Dark'
+                ? 'bg-white text-black hover:bg-white hover:text-black'
+                : 'hover:bg-white hover:text-black'
+            }
           >
             Dark
           </Button>
           <Button
             onClick={toggleBackground}
-            className='hover:bg-white hover:text-black'
+            className={
+              background === 'Animated'
+                ? 'bg-white text-black hover:bg-white hover:text-black'
+                : 'hover:bg-white hover:text-black'
+            }
           >
             Animated
           </Button>

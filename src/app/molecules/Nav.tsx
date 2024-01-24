@@ -1,10 +1,10 @@
-"use client";
+'use client';
 
-import React from "react";
-import { useTheme } from "next-themes";
-import { Progress } from "../atoms/progress";
+import React from 'react';
+import { useTheme } from 'next-themes';
+import { Progress } from '../atoms/progress';
 
-import { cn } from "@/app/utils/lib/utils";
+import { cn } from '@/app/utils/lib/utils';
 
 type NavProps = {
   children: React.ReactNode;
@@ -12,16 +12,6 @@ type NavProps = {
 };
 
 const Nav: React.FC<NavProps> = ({ children, stepNumber }) => {
-  const { setTheme, resolvedTheme } = useTheme();
-  const isDark = resolvedTheme === "dark";
-
-  let theme = "light";
-  if (isDark) {
-    theme = "dark";
-  } else {
-    theme = "light";
-  }
-
   const stepToPercent = (step: number) => {
     if (step === 1) {
       return 0;
@@ -34,22 +24,14 @@ const Nav: React.FC<NavProps> = ({ children, stepNumber }) => {
     }
   };
 
-  function changeTheme() {
-    if (isDark) {
-      setTheme("light");
-    } else {
-      setTheme("dark");
-    }
-  }
-
   return (
-    <header className={cn("grid place-items-center")}>
-      <nav className={cn("place-self-end space-x-2")}>
+    <header className={cn('grid place-items-center')}>
+      <nav className={cn('place-self-end space-x-2')}>
         {children}
-        <div className={cn("absolute top-6 right-4 w-[20%]")}>
+        <div className={cn('absolute top-6 right-4 w-[20%]')}>
           <Progress
             value={stepToPercent(stepNumber)}
-            className="h-8 border border-white"
+            className='h-8 border border-white'
           />
         </div>
       </nav>
