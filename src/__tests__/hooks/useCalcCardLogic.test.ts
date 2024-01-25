@@ -25,6 +25,7 @@ describe('useCalcCardLogic', () => {
     const { result } = renderHook(() => useCalcCardLogic());
 
     act(() => {
+      result.current.setEstimate(5);
       result.current.handleNextButtonClick();
     });
 
@@ -35,7 +36,10 @@ describe('useCalcCardLogic', () => {
     const { result } = renderHook(() => useCalcCardLogic());
 
     act(() => {
-      result.current.handleNextButtonClick(); // increment first to 2
+      result.current.setEstimate(5);
+      result.current.handleNextButtonClick();
+      result.current.setEstimate(10);
+      result.current.handleBackButtonClick();
       result.current.handleBackButtonClick();
     });
 
@@ -94,7 +98,7 @@ describe('useCalcCardLogic', () => {
       result.current.handleSubmit();
     });
 
-    expect(result.current.result).toBe('2 hodin');
+    expect(result.current.result).toBe('2 hodiny');
   });
 
   it('should update result correctly on handleSubmit with different input values', () => {
@@ -110,7 +114,7 @@ describe('useCalcCardLogic', () => {
       result.current.handleSubmit();
     });
 
-    expect(result.current.result).toBe('2 hodin');
+    expect(result.current.result).toBe('2 hodiny');
 
     act(() => {
       result.current.setEstimate(8);
@@ -122,6 +126,6 @@ describe('useCalcCardLogic', () => {
       result.current.handleSubmit();
     });
 
-    expect(result.current.result).toBe('1 MD (16 hodin)');
+    expect(result.current.result).toBe('2 MD (16 hodin)');
   });
 });

@@ -1,8 +1,12 @@
-import type { Config } from 'jest';
+import type { Config } from '@jest/types';
 
-const config: Config = {
+const config: Config.InitialOptions = {
+  preset: 'jest-playwright-preset',
   verbose: true,
-  testEnvironment: 'jsdom',
+  testEnvironment: 'jest-environment-jsdom',
+  moduleNameMapper: {
+    '^@/app/(.*)$': '<rootDir>/app/$1',
+  },
 };
 
 export default config;

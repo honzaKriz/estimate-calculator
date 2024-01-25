@@ -35,6 +35,7 @@ const CalcCard = () => {
             <Button
               className='z-1000 absolute left-4 top-5 bg-slate-700 hover:bg-slate-800'
               onClick={handleBackButtonClick}
+              data-testid='back-button'
             >
               <svg
                 xmlns='http://www.w3.org/2000/svg'
@@ -70,10 +71,19 @@ const CalcCard = () => {
               value={estimate}
               onChange={(e) => setEstimate(parseInt(e.target.value))}
               className='text-lime-400 font-bold'
+              data-testid='card-input'
+              onKeyDown={(e) => {
+                if (e.key === 'Enter') {
+                  handleNextButtonClick();
+                }
+              }}
             ></Input>
           ) : (
             <>
-              <div className='flex justify-between mb-8 text-white border-b pb-4'>
+              <div
+                className='flex justify-between mb-8 text-white border-b pb-4'
+                data-testid='detailed-result'
+              >
                 <div className='flex flex-col items-center'>
                   <p>Optimistický</p>
                   <p className='font-bold'>{estimatesArr[0]}h</p>
@@ -88,7 +98,7 @@ const CalcCard = () => {
                 </div>
               </div>
               <p className='font-bold text-3xl text-center text-lime-500 mb-12'>
-                Výsledný odhad jsou {result}
+                Výsledný odhad: {result}
               </p>
             </>
           )}
@@ -97,6 +107,7 @@ const CalcCard = () => {
           type='submit'
           onClick={handleNextButtonClick}
           className='bg-green-600 h-12 hover:bg-green-700'
+          data-testid='next-button'
         >
           {cardState < 3
             ? cardTexts.buttonNext
