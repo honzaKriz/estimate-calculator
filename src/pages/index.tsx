@@ -1,11 +1,11 @@
 'use client';
 
-import CalcCard from './organisms/CalcCard';
-import AnimatedBackground from './organisms/AnimatedBackground';
-import { Button } from './atoms/button';
+import CalcCard from '../app/organisms/CalcCard';
+import AnimatedBackground from '../app/organisms/AnimatedBackground';
+import { Button } from '../app/atoms/button';
 import { useState, useEffect } from 'react';
 import { Popover } from '@radix-ui/react-popover';
-import { PopoverContent, PopoverTrigger } from './atoms/popover';
+import { PopoverContent, PopoverTrigger } from '../app/atoms/popover';
 import BackgroundIcon from '../images/backgroundIcon.png';
 import Image from 'next/image';
 
