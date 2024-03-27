@@ -31,7 +31,7 @@ const useCalcCardLogic = () => {
 
   const calculateEstimate = (arr: number[]) => {
     const [o, r, p] = arr;
-    let res = Math.ceil((o + 4 * r + p) / 6);
+    const res = Math.ceil((o + 4 * r + p) / 6);
     if (res > 8) {
       return `${res / 8} MD (${res} hodin)`;
     } else if (res > 4) {

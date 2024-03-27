@@ -44,9 +44,9 @@ const CalcCard = () => {
                 viewBox='0 0 24 24'
                 fill='none'
                 stroke='currentColor'
-                stroke-width='2'
-                stroke-linecap='round'
-                stroke-linejoin='round'
+                strokeWidth='2'
+                strokeLinecap='round'
+                strokeLinejoin='round'
               >
                 <polyline points='9 14 4 9 9 4' />
                 <path d='M20 20v-7a4 4 0 0 0-4-4H4' />
@@ -97,8 +97,12 @@ const CalcCard = () => {
                   <p className='font-bold'>{estimatesArr[2]}h</p>
                 </div>
               </div>
-              <p className='font-bold text-3xl text-center text-lime-500 mb-12'>
-                Výsledný odhad: {result}
+              <p className='font-bold text-xl text-center mb-12 text-white'>
+                Výsledný odhad:
+                <br />
+                <span className='font-bold text-3xl text-center text-lime-500 mb-12'>
+                  {result}
+                </span>
               </p>
             </>
           )}
