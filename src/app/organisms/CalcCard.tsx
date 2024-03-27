@@ -27,7 +27,7 @@ const CalcCard = () => {
   return (
     <>
       <Card
-        className='bg-black mt-32 z-1000 absolute left-1/2 top-5 transform -translate-x-1/2 grid col-span-1 gap-4 px-32 pt-24'
+        className='bg-black mt-32 z-1000 absolute left-1/2 top-5 transform -translate-x-1/2 grid col-span-1 gap-4 px-32'
         style={{ backgroundColor: 'rgba(0, 0, 0, 0.6)' }}
       >
         <Nav stepNumber={cardState}>
@@ -97,10 +97,10 @@ const CalcCard = () => {
                   <p className='font-bold'>{estimatesArr[2]}h</p>
                 </div>
               </div>
-              <p className='font-bold text-xl text-center mb-12 text-white'>
+              <p className='font-bold text-xl text-center mb-2 text-white'>
                 Výsledný odhad:
                 <br />
-                <span className='font-bold text-3xl text-center text-lime-500 mb-12'>
+                <span className='font-bold text-3xl text-center text-lime-500'>
                   {result}
                 </span>
               </p>
